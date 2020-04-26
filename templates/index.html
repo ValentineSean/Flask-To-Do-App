@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1>To-Do App</h1>
+    <div class="my_form">
+        <h3>New To Do Task: </h3>
+
+        <form action="/add" method="POST">
+            <input type="text" name="to_do_item"> 
+            <input class="add_btn" type="submit" value="Add Task">
+        </form>
+    </div>
+
+    <div class="incomplete_items">
+        <h2>To Do List</h2>
+        <form action="/update" method="POST">
+            <ul>
+                {% for to_do in incomplete %}
+                <li><input name="my_check_box" value="{{ to_do.0 }}" type="checkbox">{{ to_do.1 }}</li>
+                {% endfor %}
+            
+            </ul>
+
+            <input class="update_btn" type="submit" value="Update List">
+        </form>
+
+    </div>
+
+    <div class="completed">
+        <h2>Completed Tasks</h2>
+        <form action="/clear_all" method="POST">
+            <ul>
+                {% for to_do in complete %}
+                <li>{{ to_do.1 }}</li>
+                {% endfor %}
+            </ul>
+
+            <input class="clear_all" type="submit" value="Clear List">
+        </form>
+    </div>
+
+    <footer>&copyValentine Sean 2020</footer>
+</body>
+</html>
